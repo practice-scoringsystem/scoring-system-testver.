@@ -20,8 +20,6 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(id + "is not found");
 		} else {
-			System.out.println("emptyの外" + id);
-			System.out.println("emptyの外");
 			return user;
 		}
 	}

@@ -19,7 +19,6 @@ public class RootController {
 	
 	@GetMapping("/login")
 	public String login() {
-		System.out.println("ログインコントローラー");
 		return "login";
 	}
 	

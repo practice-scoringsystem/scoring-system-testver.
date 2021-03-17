@@ -33,6 +33,10 @@ public class User implements UserDetails {
 		return password;
 	}
 	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	@Override
 	public String getUsername() {
 		// TODO 自動生成されたメソッド・スタブ
@@ -42,25 +46,25 @@ public class User implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 }
