@@ -4,7 +4,7 @@
 <mapper namespace="com.emyus.auth.UserRepository">
 
 	<!--今回利用するステートメントの定義 -->
-	<select id="identifyUser" parameterType="java.lang.Integer"
+	<select id="identifyUser" parameterType="java.lang.String"
 		resultMap="userDitails">
 		select
 		id, name, password

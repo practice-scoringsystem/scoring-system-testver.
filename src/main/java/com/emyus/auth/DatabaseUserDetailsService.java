@@ -13,9 +13,18 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(int id) throws UsernameNotFoundException {
-		// TODO 自動生成されたメソッド・スタブ
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
+		System.out.println(id);
+		if (isEmpty(id)) {
+			System.out.println("emptyの中");
+			throw new UsernameNotFoundException("ユーザーIDを入力してください");
+		}
+		System.out.println("emptyの外");
 		return userRepository.identifyUser(id);
+	}
+
+	private boolean isEmpty(String id) {
+		return false;
 	}
 
 }

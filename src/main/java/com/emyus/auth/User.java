@@ -14,6 +14,7 @@ public class User implements UserDetails {
 	
 	private int id;
 	private String name;
+	private String password;
 	
 	public int getId() {
 		return id;
@@ -39,7 +40,11 @@ public class User implements UserDetails {
 	@Override
 	public String getPassword() {
 		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	@Override
