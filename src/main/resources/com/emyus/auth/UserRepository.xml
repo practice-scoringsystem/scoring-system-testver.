@@ -7,16 +7,15 @@
 	<select id="identifyUser" parameterType="java.lang.String"
 		resultMap="userDitails">
 		select
-		id, name, password
+		id, password
 		from user
 		where id = #{id}
 	</select>
 
 	<!--UserクラスのプロパティとDBのデータをマップする -->
 	<resultMap type="com.emyus.auth.User" id="userDitails">
-		<result property="id" column="ID" />
-		<result property="name" column="NAME" />
-		<result property="password" column="PASSWORD" />
+		<result property="id" column="id" />
+		<result property="password" column="password" />
 	</resultMap>
 
 </mapper>

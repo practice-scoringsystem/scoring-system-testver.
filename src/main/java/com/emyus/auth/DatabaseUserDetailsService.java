@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.emyus.auth.UserRepository;
+
 @Service
 public class DatabaseUserDetailsService implements UserDetailsService {
 
@@ -14,17 +16,14 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
-		System.out.println(id);
-		if (isEmpty(id)) {
-			System.out.println("emptyの中");
-			throw new UsernameNotFoundException("ユーザーIDを入力してください");
+		User user = userRepository.identifyUser(id);
+		if (user == null) {
+			throw new UsernameNotFoundException(id + "is not found");
+		} else {
+			System.out.println("emptyの外" + id);
+			System.out.println("emptyの外");
+			return user;
 		}
-		System.out.println("emptyの外");
-		return userRepository.identifyUser(id);
-	}
-
-	private boolean isEmpty(String id) {
-		return false;
 	}
 
 }
