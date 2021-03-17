@@ -24,13 +24,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService);
 	}
 	
+	//logout機能　spring securityにより/logoutというURLにpostでリクエストがあればlogout処理がされる
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/css/**").permitAll()
 			.anyRequest().authenticated()
 			.and()
-			.formLogin().loginPage("/login").usernameParameter("id").passwordParameter("password").permitAll();
+			.formLogin().loginPage("/login").usernameParameter("id").passwordParameter("password").permitAll()
+			.and()
+			.logout().logoutUrl("/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID");
 	}
 
 	@Bean
