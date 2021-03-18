@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>問題・答え一覧</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>問題・答え一覧</p>
+
+	<div th:if="${qList} !=null">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>問題</th>
+				<th>答え</th>
+			</tr>
+			<!-- controllerで渡ってきた値を${}に入れてループ内ではquestionとして扱う -->
+			<tr th:each="question:${qList}">
+				<td th:text="${question.id}"></td>
+				<td th:text="${question.question}"></td>
+				<div th:each="correctAnswer:${aList}">
+				<div data-th-if="${question.id eq correctAnswer.questions_id}">
+					<td th:text="${correctAnswer.answer}"></td>
+				</div>
+			</div>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>
