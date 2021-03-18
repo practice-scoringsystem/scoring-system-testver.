@@ -13,7 +13,8 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = 2041607871453549860L;
 	
 	private int id;
-	private String name;
+	private String password;
+	private int deleteflag;
 	
 	public int getId() {
 		return id;
@@ -23,12 +24,12 @@ public class User implements UserDetails {
 		this.id = id;
 	}
 	
-	public String getName() {
-		return name;
+	public int getDeleteFlag() {
+		return deleteflag;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setDeleteFlag(int deleteflag) {
+		this.deleteflag = deleteflag;
 	}
 
 	@Override
@@ -38,10 +39,13 @@ public class User implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return password;
 	}
-
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 	@Override
 	public String getUsername() {
 		// TODO 自動生成されたメソッド・スタブ
@@ -51,25 +55,25 @@ public class User implements UserDetails {
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 }
