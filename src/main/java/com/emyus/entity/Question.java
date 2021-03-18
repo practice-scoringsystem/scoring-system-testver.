@@ -2,6 +2,7 @@ package com.emyus.entity;
 
 import java.sql.Timestamp;
 
+//Entity = beanの役割をしている
 public class Question {
 	
 	private int id;
