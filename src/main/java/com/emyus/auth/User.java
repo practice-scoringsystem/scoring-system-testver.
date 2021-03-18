@@ -14,6 +14,7 @@ public class User implements UserDetails {
 	
 	private int id;
 	private String password;
+	private int deleteflag;
 	
 	public int getId() {
 		return id;
@@ -21,6 +22,14 @@ public class User implements UserDetails {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getDeleteFlag() {
+		return deleteflag;
+	}
+
+	public void setDeleteFlag(int deleteflag) {
+		this.deleteflag = deleteflag;
 	}
 
 	@Override

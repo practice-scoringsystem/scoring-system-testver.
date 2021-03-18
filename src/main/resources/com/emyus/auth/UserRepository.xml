@@ -10,6 +10,7 @@
 		id, password
 		from users
 		where id = #{id}
+		and deleteflag = 0
 	</select>
 
 	<!--UserクラスのプロパティとDBのデータをマップする -->
