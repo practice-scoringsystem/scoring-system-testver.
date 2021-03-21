@@ -12,4 +12,9 @@
          from
             questions
     </select>
+    
+    <insert id="save">
+        insert into Questions (question) values (#{question})
+    </insert>
+    
 </mapper>

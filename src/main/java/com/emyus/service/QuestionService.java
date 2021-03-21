@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.emyus.entity.Question;
 import com.emyus.repository.QuestionRepository;
 
@@ -15,5 +16,9 @@ public class QuestionService {
 	//全件取得
     public List<Question> getQuestionList(){
         return this.questionRepository.findAll();
+    }
+    
+    public void save(Question question) {
+        questionRepository.save(question);
     }
 }
