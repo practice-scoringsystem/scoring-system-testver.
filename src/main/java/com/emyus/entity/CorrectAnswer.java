@@ -2,14 +2,25 @@ package com.emyus.entity;
 
 import java.sql.Timestamp;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class CorrectAnswer {
 
 	private int id;
+	
+	@NotNull
 	private int questions_id;
+	
+	@NotNull
+	@Size(min = 1, max = 200, message = "Please input 200character or less")
 	private String answer;
+	
 	private Timestamp created_at;
+	
 	private Timestamp updated_at;
 
+	
 	public int getId() {
 		return id;
 	}

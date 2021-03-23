@@ -1,5 +1,6 @@
 package com.emyus.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,8 @@ public class QuestionController {
 	 * 新規作成画面の表示
 	 */
 	@GetMapping("/new")
-	public String registerForm(RegisterForm registerFrom,
-			Model model,
-			//registerが完了したらメッセージを受け取る
+	public String registerForm(RegisterForm registerFrom, Model model,
+			// registerが完了したらメッセージを受け取る
 			@ModelAttribute("register") String register) {
 		model.addAttribute("title", "新規登録画面");
 		return "new";
@@ -57,19 +57,26 @@ public class QuestionController {
 		model.addAttribute("title", "新規登録画面");
 		return "new";
 	}
-
+	
+	@ModelAttribute
+	  public RegisterForm setUpRegisterForm() {
+	    RegisterForm registerForm = new RegisterForm();
+	    registerForm.setAnsList(Arrays.asList(new AnswerForm(), new AnswerForm()));
+	    return registerForm;
+	  }
+	
 	/**
 	 * 確認画面へ送る
 	 */
 	@PostMapping("/registerConfirm")
-	public String registerConfirm(@Validated RegisterForm registerForm,
-			BindingResult result,
-			Model model) {
-		//BindingResultにバリデーションの結果が入ってくるのでtrueかfalseの場合で分岐
-		if(result.hasErrors()) {
+	public String registerConfirm(@Validated RegisterForm registerForm, BindingResult result, Model model) {
+		// BindingResultにバリデーションの結果が入ってくるのでtrueかfalseの場合で分岐
+		if (result.hasErrors()) {
+			System.out.println(result);
 			model.addAttribute("title", "新規登録画面");
 			return "redirect:/new";
 		}
+		model.addAttribute("registerForm", registerForm);
 		model.addAttribute("title", "登録確認画面");
 		return "registerConfirm";
 	}
@@ -78,19 +85,17 @@ public class QuestionController {
 	 * 新規作成画面の挿入処理
 	 */
 	@PostMapping("/register")
-	public String register(@Validated RegisterForm registerForm,
-			BindingResult result,
-			Model model,
+	public String register(@Validated RegisterForm registerForm, BindingResult result, Model model,
 			RedirectAttributes redirectAttributes) {
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("title", "登録画面");
 			return "redirect:/new";
 		}
-		
+
 		Question question = makeQuestion(registerForm);
 		questionService.save(question);
-		//FlashAttributeを使う　リクエストを隔ててデータが保管できる。"Registerd!"が表示されたらsessionが破棄される
+		// FlashAttributeを使う リクエストを隔ててデータが保管できる。"Registerd!"が表示されたらsessionが破棄される
 		redirectAttributes.addFlashAttribute("register", "Registerd!");
 		return "redirect:/list";
 	}

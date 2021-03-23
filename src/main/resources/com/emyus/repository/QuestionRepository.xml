@@ -13,8 +13,8 @@
             questions
     </select>
     
-    <insert id="save">
-        insert into Questions (question) values (#{question})
+    <!-- questionのオブジェクトが入ってきてるのでparameterTypeを設定 -->
+    <insert id="save" parameterType="string">
+        insert into Questions (question, created_at) values (#{question}, current_timestamp())
     </insert>
-    
 </mapper>

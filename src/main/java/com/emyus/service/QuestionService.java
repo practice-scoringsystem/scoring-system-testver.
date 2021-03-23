@@ -18,6 +18,7 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
     
+    //登録機能
     public void save(Question question) {
         questionRepository.save(question);
     }
