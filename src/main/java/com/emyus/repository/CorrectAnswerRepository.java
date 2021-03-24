@@ -10,4 +10,7 @@ import com.emyus.entity.CorrectAnswer;
 public interface CorrectAnswerRepository {
 	//Questionに紐づくものを取得
 		List<CorrectAnswer> findAll();
+		
+		//新規登録
+		void ansSave(CorrectAnswer answer);
 }

@@ -14,4 +14,12 @@
 		correct_answers
 		<!-- where questions_id = #{questions_id} -->
 	</select>
+
+	<insert id="ansSave" parameterType="string">
+		insert into correct_answers
+		(questions_id, answer, created_at) values
+		((select id from questions order by created_at desc limit 1),
+		#{answer},
+		current_timestamp());
+	</insert>
 </mapper>

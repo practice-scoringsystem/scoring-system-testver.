@@ -3,18 +3,29 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.emyus.repository.QuestionRepository">
-    <select id="findAll" resultType="com.emyus.entity.Question">
-        select
-            id,
-            question,
-            created_at,
-            updated_at
-         from
-            questions
+	<select id="findAll" resultType="com.emyus.entity.Question">
+		select
+			id,
+			question,
+			created_at,
+			updated_at
+		from
+			questions
+	</select>
+
+	<!-- questionのオブジェクトが入ってきてるのでparameterTypeを設定 -->
+	<insert id="save" parameterType="string">
+		insert into Questions (question, created_at) values (#{question},
+		current_timestamp())
+	</insert>
+	
+	 <select id="select" resultType="com.emyus.entity.Question">
+        select * from questions where id = #{id}
     </select>
-    
-    <!-- questionのオブジェクトが入ってきてるのでparameterTypeを設定 -->
-    <insert id="save" parameterType="string">
-        insert into Questions (question, created_at) values (#{question}, current_timestamp())
-    </insert>
+
+	<update id="updateAuthor">
+		update Questions set
+			question = #{question},
+		where id = #{id}
+	</update>
 </mapper>

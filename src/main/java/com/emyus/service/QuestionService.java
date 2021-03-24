@@ -22,4 +22,9 @@ public class QuestionService {
     public void save(Question question) {
         questionRepository.save(question);
     }
+
+    //1件検索
+	public Question select(int id) {
+		return questionRepository.select(id);
+	}
 }

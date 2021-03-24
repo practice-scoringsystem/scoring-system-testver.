@@ -11,4 +11,6 @@ public interface QuestionRepository {
 	List<Question> findAll();
 	//新規登録
 	void save(Question question);
+	//1件検索
+	Question select(int id);
 }

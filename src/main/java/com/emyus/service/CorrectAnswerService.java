@@ -17,4 +17,9 @@ public class CorrectAnswerService {
 	public List<CorrectAnswer> getCorrectAnswerList() {
 		return this.correctAnswerRepository.findAll();
 	}
+	
+	//登録機能
+    public void ansSave(CorrectAnswer answer) {
+        correctAnswerRepository.ansSave(answer);
+    }
 }

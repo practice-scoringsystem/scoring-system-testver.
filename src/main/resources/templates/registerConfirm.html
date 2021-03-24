@@ -9,17 +9,21 @@
 	<h2 th:text="${title}"></h2>
 	<div th:object="${registerForm}">
 		<p th:text="*{question}"></p>
-		<p th:text="*{answer}"></p>
+		<div th:object="${answerForm}">
+			<p th:text="*{answer}"></p>
 
-		<form method="post" th:action="@{/new}">
-			<input type="hidden" name="question" th:value="*{question}">
-			<input type="submit" value="戻る">
-		</form>
+			<form method="post" th:action="@{/new}">
+				<input type="hidden" name="question" th:value="${registerForm.question}">
+				<input type="hidden" name="answer" th:value="*{answer}"> <input
+					type="submit" value="戻る">
+			</form>
 
-		<form method="post" th:action="@{/register}">
-			<input type="hidden" name="question" th:value="*{question}">
-			<input type="submit" value="登録する">
-		</form>
+			<form method="post" th:action="@{/register}">
+				<input type="hidden" name="question" th:value="${registerForm.question}">
+				<input type="hidden" name="answer" th:value="*{answer}"> <input
+					type="submit" value="登録する">
+			</form>
+		</div>
 	</div>
 </body>
 </html>

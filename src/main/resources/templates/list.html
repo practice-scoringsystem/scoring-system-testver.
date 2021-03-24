@@ -26,6 +26,7 @@
 						<td th:text="${correctAnswer.answer}"></td>
 					</div>
 				</div>
+				<td><a class="btn btn-primary" th:href="@{${question.id} + '/edit'}">編集</a></td>
 			</tr>
 		</table>
 	</div>
