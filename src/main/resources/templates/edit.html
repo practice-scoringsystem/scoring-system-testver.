@@ -7,12 +7,11 @@
 <body>
 <h1>編集画面</h1>
     <form th:action="@{/editConfirm}" th:object="${registerForm}" th:method="post">
-        <a th:href="@{/list}">キャンセル</a>
+        <a th:href="@{/list}">戻る</a>
         <input type="hidden" th:field="*{id}" />
         <table>
             <tr>
                 <th class="cell_title">問題</th>
-                <th class="cell_required">※</th>
                 <td><input type="text" th:field="*{question}"></td>
             </tr>
         </table>

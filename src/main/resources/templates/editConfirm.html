@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>編集確認画面</title>
+</head>
+<body>
+	<h2>編集確認画面</h2>
+	<div th:object="${registerForm}">
+		<p th:text="*{question}"></p>
+		
+		<form method="post" th:action="@{/edit}">
+			<input type="hidden" name="id" th:value="${registerForm.id}">
+			<input type="hidden" name="question" th:value="${registerForm.question}">
+			<input type="submit" value="戻る">
+		</form>
+
+		<form method="post" th:action="@{/register}">
+			<input type="hidden" name="id" th:value="${registerForm.id}">
+			<input type="hidden" name="question" th:value="${registerForm.question}">
+			<input type="submit" value="更新する">
+		</form>
+	</div>
+</body>
+</html>

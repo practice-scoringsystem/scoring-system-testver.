@@ -13,4 +13,5 @@ public interface QuestionRepository {
 	void save(Question question);
 	//1件検索
 	Question select(int id);
+	
 }
