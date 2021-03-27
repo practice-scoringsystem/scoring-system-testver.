@@ -103,7 +103,7 @@ public class QuestionController {
 	 * 編集画面を表示
 	 */
 	@GetMapping("/{id}/edit")
-	public String edit(@PathVariable int id, RegisterForm registerForm, Model model) {		
+	public String edit(@PathVariable int id, RegisterForm registerForm, Model model) {
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
@@ -111,7 +111,7 @@ public class QuestionController {
 		return "edit";
 	}
 
-	//戻るボタン用、formからQuestionに詰め替えないといけないかもprivateでメソッド作ってもいい
+	// 戻るボタン用、formからQuestionに詰め替えないといけないかもprivateでメソッド作ってもいい
 	@PostMapping("/{id}/edit")
 	public String editBack(@PathVariable int id, RegisterForm registerFrom, Model model) {
 		Question question = questionService.select(id);
@@ -132,22 +132,44 @@ public class QuestionController {
 		model.addAttribute("registerForm", registerForm);
 		return "editConfirm";
 	}
+
+	/**
+	 * 編集画面の更新処理
+	 */
+	@PostMapping("/update")
+	public String update(RegisterForm registerForm, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "/edit";
+		}
+		Question question = new Question();
+		question.setId(registerForm.getId());
+		question.setQuestion(registerForm.getQuestion());
+		questionService.update(question);
+		return "redirect:/list";
+	}
+
+	/**
+	 * 削除確認画面を表示
+	 */
+	@GetMapping("/{id}/deleteConfirm")
+	public String deleteConfirm(@PathVariable int id, RegisterForm registerForm, Model model) {
+		Question question = questionService.select(id);
+		registerForm.setId(question.getId());
+		registerForm.setQuestion(question.getQuestion());
+		model.addAttribute("registerForm", registerForm);
+		return "deleteConfirm";
+	}
 	
 	/**
-	   * 編集画面の更新処理
-	   */
-	  @PostMapping("/update")
-	  public String update(RegisterForm registerForm, BindingResult result, Model model) {
-	    if (result.hasErrors()) {
-	      return "/edit";
-	    }
-	    Question question = new Question();
-	    question.setId(registerForm.getId());
-	    question.setQuestion(registerForm.getQuestion());
-	    questionService.update(question);
-	    return "redirect:/list";
-	  }
-	
+	 * 削除
+	 */
+	@PostMapping("/delete")
+    public String delete(RegisterForm registerForm) {
+		Question question = new Question();
+		question.setId(registerForm.getId());
+		questionService.delete(question);
+        return "redirect:/list";
+    }
 
 	private Question makeQuestion(RegisterForm registerForm) {
 		Question question = new Question();

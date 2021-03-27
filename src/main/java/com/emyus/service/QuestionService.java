@@ -11,25 +11,30 @@ import com.emyus.repository.QuestionRepository;
 @Service
 public class QuestionService {
 	@Autowired
-    QuestionRepository questionRepository;
-	
-	//全件取得
-    public List<Question> getQuestionList(){
-        return this.questionRepository.findAll();
-    }
-    
-    //登録機能
-    public void save(Question question) {
-        questionRepository.save(question);
-    }
+	QuestionRepository questionRepository;
 
-    //1件検索
+	// 全件取得
+	public List<Question> getQuestionList() {
+		return this.questionRepository.findAll();
+	}
+
+	// 登録機能
+	public void save(Question question) {
+		questionRepository.save(question);
+	}
+
+	// 1件検索
 	public Question select(int id) {
 		return questionRepository.select(id);
 	}
-	
-	//更新
+
+	// 更新
 	public void update(Question question) {
 		questionRepository.update(question);
+	}
+
+	// 削除
+	public void delete(Question question) {
+		questionRepository.delete(question);
 	}
 }

@@ -29,4 +29,7 @@
 		where id = #{id}
 	</update>
 	
+	<delete id="delete">
+     delete from questions where id = #{id}
+   </delete>
 </mapper>

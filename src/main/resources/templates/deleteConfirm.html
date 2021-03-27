@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>削除確認</title>
+</head>
+<body>
+
+	<h2>削除確認画面</h2>
+	<div th:object="${registerForm}">
+		<p th:text="*{question}"></p>
+
+		<form method="get" th:action="@{/list}">
+		  <input type="submit" value="戻る">
+		</form>
+
+		<form method="post" th:action="@{/delete}">
+			<input type="hidden" name="id" th:value="${registerForm.id}">
+			<input type="hidden" name="question"
+				th:value="${registerForm.question}"> <input type="submit"
+				value="削除する">
+		</form>
+	</div>
+
+</body>
+</html>

@@ -16,4 +16,7 @@ public interface QuestionRepository {
 	
 	//更新
 	void update(Question question);
+	
+	//削除
+	void delete(Question question);
 }
