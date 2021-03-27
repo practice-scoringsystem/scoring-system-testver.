@@ -23,9 +23,10 @@
         select * from questions where id = #{id}
     </select>
 
-	<update id="updateAuthor">
+	<update id="update">
 		update Questions set
-			question = #{question},
+			question = #{question}
 		where id = #{id}
 	</update>
+	
 </mapper>

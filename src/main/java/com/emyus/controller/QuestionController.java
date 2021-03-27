@@ -103,7 +103,7 @@ public class QuestionController {
 	 * 編集画面を表示
 	 */
 	@GetMapping("/{id}/edit")
-	public String edit(@PathVariable int id, RegisterForm registerForm, Model model) {
+	public String edit(@PathVariable int id, RegisterForm registerForm, Model model) {		
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
@@ -134,8 +134,19 @@ public class QuestionController {
 	}
 	
 	/**
-	 * 更新
-	 */
+	   * 編集画面の更新処理
+	   */
+	  @PostMapping("/update")
+	  public String update(RegisterForm registerForm, BindingResult result, Model model) {
+	    if (result.hasErrors()) {
+	      return "/edit";
+	    }
+	    Question question = new Question();
+	    question.setId(registerForm.getId());
+	    question.setQuestion(registerForm.getQuestion());
+	    questionService.update(question);
+	    return "redirect:/list";
+	  }
 	
 
 	private Question makeQuestion(RegisterForm registerForm) {

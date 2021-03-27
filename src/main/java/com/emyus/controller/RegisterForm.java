@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 //formオブジェクト
 public class RegisterForm {
 	
+	@NotNull
 	private int id;
 
 	@Size(min = 1, max = 500, message = "Please input 500character or less")

@@ -14,4 +14,6 @@ public interface QuestionRepository {
 	//1件検索
 	Question select(int id);
 	
+	//更新
+	void update(Question question);
 }

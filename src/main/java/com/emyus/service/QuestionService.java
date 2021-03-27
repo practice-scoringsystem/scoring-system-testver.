@@ -27,4 +27,9 @@ public class QuestionService {
 	public Question select(int id) {
 		return questionRepository.select(id);
 	}
+	
+	//更新
+	public void update(Question question) {
+		questionRepository.update(question);
+	}
 }
