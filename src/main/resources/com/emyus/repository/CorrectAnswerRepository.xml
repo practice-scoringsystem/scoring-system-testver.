@@ -15,11 +15,24 @@
 		<!-- where questions_id = #{questions_id} -->
 	</select>
 
+	<select id="select" resultType="com.emyus.entity.CorrectAnswer">
+		select * from correct_answers c
+		left join questions q on c.questions_id = q.id where questions_id =
+		#{id}
+	</select>
+
 	<insert id="ansSave" parameterType="string">
 		insert into correct_answers
 		(questions_id, answer, created_at) values
-		((select id from questions order by created_at desc limit 1),
+		((select id from questions
+		order by created_at desc limit 1),
 		#{answer},
-		current_timestamp());
+		current_timestamp())
 	</insert>
+
+	<update id="ansUpdate">
+		update correct_answers c left join questions q on
+		c.questions_id = q.id set c.answer = #{answer} where q.id = #{id}
+	</update>
+
 </mapper>

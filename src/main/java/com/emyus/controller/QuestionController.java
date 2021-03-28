@@ -103,11 +103,17 @@ public class QuestionController {
 	 * 編集画面を表示
 	 */
 	@GetMapping("/{id}/edit")
-	public String edit(@PathVariable int id, RegisterForm registerForm, Model model) {
+	public String edit(@PathVariable int id, RegisterForm registerForm, AnswerForm answerForm, Model model) {
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
+		
+		CorrectAnswer answer = correctAnswerService.select(id);
+		answerForm.setQuestionsId(answer.getQuestionsId());
+		answerForm.setAnswer(answer.getAnswer());
+		
 		model.addAttribute("registerForm", registerForm);
+		model.addAttribute("answerForm", answerForm);
 		return "edit";
 	}
 

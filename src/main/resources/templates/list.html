@@ -22,7 +22,7 @@
 				<td th:text="${question.id}"></td>
 				<td th:text="${question.question}"></td>
 				<div th:each="correctAnswer:${aList}">
-					<div data-th-if="${question.id eq correctAnswer.questions_id}">
+					<div data-th-if="${question.id eq correctAnswer.questionsId}">
 						<td th:text="${correctAnswer.answer}"></td>
 					</div>
 				</div>
