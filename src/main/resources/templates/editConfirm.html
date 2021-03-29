@@ -8,18 +8,23 @@
 	<h2>編集確認画面</h2>
 	<div th:object="${registerForm}">
 		<p th:text="*{question}"></p>
-		
-		<form method="post" th:action="@{/edit}">
-			<input type="hidden" name="id" th:value="${registerForm.id}">
-			<input type="hidden" name="question" th:value="${registerForm.question}">
-			<input type="submit" value="戻る">
-		</form>
-
-		<form method="post" th:action="@{/update}">
-			<input type="hidden" name="id" th:value="${registerForm.id}">
-			<input type="hidden" name="question" th:value="${registerForm.question}">
-			<input type="submit" value="更新する">
-		</form>
+		<div th:object="${answerForm}">
+			<p th:text="*{answer}"></p>
+			
+			<form method="post" th:action="@{/edit}">
+				<input type="hidden" name="id" th:value="${registerForm.id}">
+				<input type="hidden" name="question" th:value="${registerForm.question}">
+				<input type="hidden" name="answer" th:value="${answerForm.answer}">
+				<input type="submit" value="戻る">
+			</form>
+	
+			<form method="post" th:action="@{/update}">
+				<input type="hidden" name="id" th:value="${registerForm.id}">
+				<input type="hidden" name="question" th:value="${registerForm.question}">
+				<input type="hidden" name="answer" th:value="${answerForm.answer}">
+				<input type="submit" value="更新する">
+			</form>
+		</div>
 	</div>
 </body>
 </html>

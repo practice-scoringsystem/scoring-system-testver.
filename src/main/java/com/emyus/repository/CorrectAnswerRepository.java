@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.emyus.entity.CorrectAnswer;
-import com.emyus.entity.Question;
 
 @Mapper
 public interface CorrectAnswerRepository {
@@ -19,5 +18,5 @@ public interface CorrectAnswerRepository {
 	void ansSave(CorrectAnswer answer);
 
 	// 更新
-	void update(CorrectAnswer answer);
+	void ansUpdate(CorrectAnswer answer);
 }

@@ -1,7 +1,6 @@
 package com.emyus.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -119,11 +118,17 @@ public class QuestionController {
 
 	// 戻るボタン用、formからQuestionに詰め替えないといけないかもprivateでメソッド作ってもいい
 	@PostMapping("/{id}/edit")
-	public String editBack(@PathVariable int id, RegisterForm registerFrom, Model model) {
+	public String editBack(@PathVariable int id, RegisterForm registerFrom, AnswerForm answerForm, Model model) {
 		Question question = questionService.select(id);
 		registerFrom.setId(question.getId());
 		registerFrom.setQuestion(question.getQuestion());
+		
+		CorrectAnswer answer = correctAnswerService.select(id);
+		answerForm.setQuestionsId(answer.getQuestionsId());
+		answerForm.setAnswer(answer.getAnswer());
+		
 		model.addAttribute("registerForm", registerFrom);
+		model.addAttribute("answerForm", answerForm);
 		return "edit";
 	}
 
@@ -131,11 +136,12 @@ public class QuestionController {
 	 * 編集確認画面を表示
 	 */
 	@PostMapping("/editConfirm")
-	public String editConfirm(@Validated RegisterForm registerForm, BindingResult result, Model model) {
+	public String editConfirm(@Validated RegisterForm registerForm, AnswerForm answerForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "redirect:/edit";
 		}
 		model.addAttribute("registerForm", registerForm);
+		model.addAttribute("answerForm", answerForm);
 		return "editConfirm";
 	}
 

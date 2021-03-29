@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.emyus.entity.CorrectAnswer;
-import com.emyus.entity.Question;
 import com.emyus.repository.CorrectAnswerRepository;
 
 @Service
@@ -31,6 +30,6 @@ public class CorrectAnswerService {
 
 	// 更新
 	public void update(CorrectAnswer answer) {
-		correctAnswerRepository.update(answer);
+		correctAnswerRepository.ansUpdate(answer);
 	}
 }
