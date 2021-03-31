@@ -32,7 +32,7 @@
 
 	<update id="ansUpdate">
 		update correct_answers c left join questions q on
-		c.questions_id = q.id set c.answer = #{answer} where q.id = #{id}
+		c.questions_id = q.id set c.answer = #{answer} where q.id = #{questions_id}
 	</update>
 
 </mapper>

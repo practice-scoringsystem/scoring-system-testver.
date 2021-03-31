@@ -29,7 +29,7 @@ public class CorrectAnswerService {
 	}
 
 	// 更新
-	public void update(CorrectAnswer answer) {
+	public void ansUpdate(CorrectAnswer answer) {
 		correctAnswerRepository.ansUpdate(answer);
 	}
 }

@@ -117,6 +117,7 @@ public class QuestionController {
 	}
 
 	// 戻るボタン用、formからQuestionに詰め替えないといけないかもprivateでメソッド作ってもいい
+	//今のところ機能してない
 	@PostMapping("/{id}/edit")
 	public String editBack(@PathVariable int id, RegisterForm registerFrom, AnswerForm answerForm, Model model) {
 		Question question = questionService.select(id);
@@ -149,14 +150,22 @@ public class QuestionController {
 	 * 編集画面の更新処理
 	 */
 	@PostMapping("/update")
-	public String update(RegisterForm registerForm, BindingResult result, Model model) {
+	public String update(RegisterForm registerForm, AnswerForm answerForm, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			return "/edit";
 		}
 		Question question = new Question();
 		question.setId(registerForm.getId());
+		System.out.println(registerForm.getId());
 		question.setQuestion(registerForm.getQuestion());
 		questionService.update(question);
+		
+		CorrectAnswer answer = new CorrectAnswer();
+		answer.setQuestionsId(answerForm.getQuestionsId());
+		System.out.println(answerForm.getQuestionsId());
+		answer.setAnswer(answerForm.getAnswer());
+		correctAnswerService.ansUpdate(answer);
+		
 		return "redirect:/list";
 	}
 
