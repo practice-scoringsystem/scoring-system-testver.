@@ -8,7 +8,7 @@
 <h1>編集画面</h1>
     <form th:action="@{/editConfirm}" th:object="${registerForm}" th:method="post">
         <a th:href="@{/list}">戻る</a>
-        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" name="id" th:field="*{id}" />
 	        <table>
 	            <tr>
 	                <th class="cell_title">問題</th>
@@ -16,7 +16,7 @@
 	            </tr>
 	            
 	            <div th:object="${answerForm}">
-				<input type="hidden" th:field="*{questions_id}" />
+				<input type="text" name="id" th:field="*{id}" />
 	            <td><label class="col-md-3 control-label">答え</label>
 				<div class="col-md-9">
 					<td><input type=text name="answer" th:field="*{answer}"></td>
