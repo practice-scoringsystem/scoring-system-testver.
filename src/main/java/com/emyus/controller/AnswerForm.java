@@ -13,11 +13,11 @@ public class AnswerForm {
 	private String answer;
 	
 
-	public int getId() {
+	public int getAnswerId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setAnswerId(int id) {
 		this.id = id;
 	}
 

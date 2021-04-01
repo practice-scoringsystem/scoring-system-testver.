@@ -16,7 +16,7 @@
 	            </tr>
 	            
 	            <div th:object="${answerForm}">
-				<input type="text" name="id" th:field="*{id}" />
+				<input type="hidden" name="id" th:field="*{AnswerId}" />
 	            <td><label class="col-md-3 control-label">答え</label>
 				<div class="col-md-9">
 					<td><input type=text name="answer" th:field="*{answer}"></td>

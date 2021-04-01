@@ -108,8 +108,7 @@ public class QuestionController {
 		registerForm.setQuestion(question.getQuestion());
 		
 		CorrectAnswer answer = correctAnswerService.select(id);
-		answerForm.setId(answer.getId());
-		System.out.println("id edit" + answer.getId());
+		answerForm.setAnswerId(answer.getId());
 		answerForm.setAnswer(answer.getAnswer());
 		
 		model.addAttribute("registerForm", registerForm);
@@ -126,7 +125,7 @@ public class QuestionController {
 		registerFrom.setQuestion(question.getQuestion());
 		
 		CorrectAnswer answer = correctAnswerService.select(id);
-		answerForm.setId(answer.getId());
+		answerForm.setAnswerId(answer.getId());
 		answerForm.setAnswer(answer.getAnswer());
 		
 		model.addAttribute("registerForm", registerFrom);
@@ -144,7 +143,6 @@ public class QuestionController {
 		}
 		model.addAttribute("registerForm", registerForm);
 		model.addAttribute("answerForm", answerForm);
-		System.out.println(answerForm.getId());
 		return "editConfirm";
 	}
 
@@ -158,13 +156,11 @@ public class QuestionController {
 		}
 		Question question = new Question();
 		question.setId(registerForm.getId());
-		System.out.println(registerForm.getId());
 		question.setQuestion(registerForm.getQuestion());
 		questionService.update(question);
 		
 		CorrectAnswer answer = new CorrectAnswer();
-		answer.setId(answerForm.getId());
-		System.out.println(answerForm.getId());
+		answer.setId(answerForm.getAnswerId());
 		answer.setAnswer(answerForm.getAnswer());
 		correctAnswerService.ansUpdate(answer);
 		
