@@ -17,4 +17,19 @@ public class CorrectAnswerService {
 	public List<CorrectAnswer> getCorrectAnswerList() {
 		return this.correctAnswerRepository.findAll();
 	}
+
+	// 1件検索
+	public CorrectAnswer select(int id) {
+		return correctAnswerRepository.select(id);
+	}
+
+	// 登録機能
+	public void ansSave(CorrectAnswer answer) {
+		correctAnswerRepository.ansSave(answer);
+	}
+
+	// 更新
+	public void ansUpdate(CorrectAnswer answer) {
+		correctAnswerRepository.ansUpdate(answer);
+	}
 }

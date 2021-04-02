@@ -8,6 +8,15 @@ import com.emyus.entity.CorrectAnswer;
 
 @Mapper
 public interface CorrectAnswerRepository {
-	//Questionに紐づくものを取得
-		List<CorrectAnswer> findAll();
+	// Questionに紐づくものを取得
+	List<CorrectAnswer> findAll();
+
+	// 1件検索
+	CorrectAnswer select(int id);
+
+	// 新規登録
+	void ansSave(CorrectAnswer answer);
+
+	// 更新
+	void ansUpdate(CorrectAnswer answer);
 }

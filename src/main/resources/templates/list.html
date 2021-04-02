@@ -6,7 +6,10 @@
 </head>
 <body>
 	<p>問題・答え一覧</p>
-
+	
+	<a class="btn btn-primary" th:href="${'/new'}">問題と答えを新規作成する</a><br>
+	<a class="btn btn-primary" th:href="${'/'}">戻る</a>
+	
 	<div th:if="${qList} !=null">
 		<table>
 			<tr>
@@ -19,10 +22,12 @@
 				<td th:text="${question.id}"></td>
 				<td th:text="${question.question}"></td>
 				<div th:each="correctAnswer:${aList}">
-				<div data-th-if="${question.id eq correctAnswer.questions_id}">
-					<td th:text="${correctAnswer.answer}"></td>
+					<div data-th-if="${question.id eq correctAnswer.questionsId}">
+						<td th:text="${correctAnswer.answer}"></td>
+					</div>
 				</div>
-			</div>
+				<td><a class="btn btn-primary" th:href="@{${question.id} + '/edit'}">編集</a></td>
+				<td><a class="btn btn-primary" th:href="@{${question.id} + '/deleteConfirm'}">削除</a></td>
 			</tr>
 		</table>
 	</div>

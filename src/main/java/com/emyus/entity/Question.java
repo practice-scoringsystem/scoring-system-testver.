@@ -10,6 +10,7 @@ public class Question {
 	private Timestamp created_at;
 	private Timestamp updated_at;
 	
+	//Questionのgetterとsetter
 	public int getId() {
 		return id;
 	}
