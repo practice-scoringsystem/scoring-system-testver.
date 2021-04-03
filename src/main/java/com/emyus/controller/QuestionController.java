@@ -171,11 +171,17 @@ public class QuestionController {
 	 * 削除確認画面を表示
 	 */
 	@GetMapping("/{id}/deleteConfirm")
-	public String deleteConfirm(@PathVariable int id, RegisterForm registerForm, Model model) {
+	public String deleteConfirm(@PathVariable int id, RegisterForm registerForm, AnswerForm answerForm, Model model) {
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
+		
+		CorrectAnswer answer = correctAnswerService.select(id);
+		answerForm.setAnswerId(answer.getId());
+		answerForm.setAnswer(answer.getAnswer());
+		
 		model.addAttribute("registerForm", registerForm);
+		model.addAttribute("answerForm", answerForm);
 		return "deleteConfirm";
 	}
 	
@@ -183,10 +189,15 @@ public class QuestionController {
 	 * 削除
 	 */
 	@PostMapping("/delete")
-    public String delete(RegisterForm registerForm) {
+    public String delete(RegisterForm registerForm, AnswerForm answerForm) {
 		Question question = new Question();
 		question.setId(registerForm.getId());
 		questionService.delete(question);
+		
+		CorrectAnswer answer = new CorrectAnswer();
+		answer.setId(answerForm.getAnswerId());
+		correctAnswerService.ansDelete(answer);
+		
         return "redirect:/list";
     }
 

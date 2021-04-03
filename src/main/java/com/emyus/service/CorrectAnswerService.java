@@ -32,4 +32,9 @@ public class CorrectAnswerService {
 	public void ansUpdate(CorrectAnswer answer) {
 		correctAnswerRepository.ansUpdate(answer);
 	}
+
+	// 削除
+	public void ansDelete(CorrectAnswer answer) {
+		correctAnswerRepository.ansDelete(answer);
+	}
 }

@@ -33,5 +33,9 @@
 	<update id="ansUpdate">
 		update correct_answers set answer = #{answer} where id = #{id}
 	</update>
+	
+	<delete id="ansDelete">
+     delete from correct_answers where id = #{id}
+   </delete>
 
 </mapper>

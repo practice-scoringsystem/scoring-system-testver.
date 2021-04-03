@@ -19,4 +19,7 @@ public interface CorrectAnswerRepository {
 
 	// 更新
 	void ansUpdate(CorrectAnswer answer);
+
+	// 削除
+	void ansDelete(CorrectAnswer answer);
 }
