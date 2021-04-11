@@ -222,6 +222,7 @@ public class QuestionController {
 	// ユーザー名の表示をする
 	@PostMapping("/testResult")
 	public String testResult(HttpServletRequest request, @ModelAttribute AnswerForm answerForm, Model model) {
+		
 		// inputされた値を配列で受け取ります questionsのidとanswersのid
 		String[] questions_ids = request.getParameterValues("id");
 		String[] ans = request.getParameterValues("answer");
@@ -233,7 +234,7 @@ public class QuestionController {
 		String[] answers = new String[ansList.size()];
 		double dubcount = 0;
 
-		for (int i = 0; i < questions_ids.length; i++) {
+		for (int i = 0; i < qId.length; i++) {
 			qId[i] = Integer.parseInt(questions_ids[i]);
 			ansList = (List<AnswerForm>) correctAnswerService.select(qId[i]);
 

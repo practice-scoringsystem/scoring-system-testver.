@@ -1,5 +1,7 @@
 package com.emyus.controller;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,11 +15,29 @@ public class AnswerForm {
 	private String answer;
 	
 	private int result;
+	
+	private List<AnswerForm> answers;
 
 	// 質問数と回答数表示
 	int qCount;
 
 	int count;
+
+	public int getAnswerId() {
+		return id;
+	}
+
+	public void setAnswerId(int id) {
+		this.id = id;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	
 	public int getResult() {
 		return result;
@@ -25,6 +45,14 @@ public class AnswerForm {
 
 	public void setResult(int result) {
 		this.result = result;
+	}
+
+	public List<AnswerForm> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<AnswerForm> answers) {
+		this.answers = answers;
 	}
 
 	public int getQCount() {
@@ -42,21 +70,5 @@ public class AnswerForm {
 	public void setCount(int count) {
 		this.count = count;
 	}
-
-	public int getAnswerId() {
-		return id;
-	}
-
-	public void setAnswerId(int id) {
-		this.id = id;
-	}
-
-	public String getAnswer() {
-		return answer;
-	}
-
-	public void setAnswer(String answer) {
-		this.answer = answer;
-	}
-
+	
 }
