@@ -20,6 +20,11 @@
 		left join questions q on c.questions_id = q.id where questions_id =
 		#{id}
 	</select>
+	
+	<select id="ansSelect" resultType="com.emyus.entity.CorrectAnswer">
+		select * from correct_answers
+		where id = #{id}
+	</select>
 
 	<insert id="ansSave" parameterType="string">
 		insert into correct_answers

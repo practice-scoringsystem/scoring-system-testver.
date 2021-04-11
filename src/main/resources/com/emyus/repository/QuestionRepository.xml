@@ -12,6 +12,15 @@
 		from
 			questions
 	</select>
+	
+	<select id="randomAll" resultType="com.emyus.entity.Question">
+		select
+			id,
+			question
+		from
+			questions
+		order by rand()
+	</select>
 
 	<!-- questionのオブジェクトが入ってきてるのでparameterTypeを設定 -->
 	<insert id="save" parameterType="string">

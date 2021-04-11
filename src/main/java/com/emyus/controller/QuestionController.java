@@ -1,6 +1,9 @@
 package com.emyus.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -106,28 +109,28 @@ public class QuestionController {
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
-		
+
 		CorrectAnswer answer = correctAnswerService.select(id);
 		answerForm.setAnswerId(answer.getId());
 		answerForm.setAnswer(answer.getAnswer());
-		
+
 		model.addAttribute("registerForm", registerForm);
 		model.addAttribute("answerForm", answerForm);
 		return "edit";
 	}
 
 	// 戻るボタン用、formからQuestionに詰め替えないといけないかもprivateでメソッド作ってもいい
-	//今のところ機能してない
+	// 今のところ機能してない
 	@PostMapping("/{id}/edit")
 	public String editBack(@PathVariable int id, RegisterForm registerFrom, AnswerForm answerForm, Model model) {
 		Question question = questionService.select(id);
 		registerFrom.setId(question.getId());
 		registerFrom.setQuestion(question.getQuestion());
-		
+
 		CorrectAnswer answer = correctAnswerService.select(id);
 		answerForm.setAnswerId(answer.getId());
 		answerForm.setAnswer(answer.getAnswer());
-		
+
 		model.addAttribute("registerForm", registerFrom);
 		model.addAttribute("answerForm", answerForm);
 		return "edit";
@@ -137,7 +140,8 @@ public class QuestionController {
 	 * 編集確認画面を表示
 	 */
 	@PostMapping("/editConfirm")
-	public String editConfirm(@Validated RegisterForm registerForm, AnswerForm answerForm, BindingResult result, Model model) {
+	public String editConfirm(@Validated RegisterForm registerForm, AnswerForm answerForm, BindingResult result,
+			Model model) {
 		if (result.hasErrors()) {
 			return "redirect:/edit";
 		}
@@ -158,12 +162,12 @@ public class QuestionController {
 		question.setId(registerForm.getId());
 		question.setQuestion(registerForm.getQuestion());
 		questionService.update(question);
-		
+
 		CorrectAnswer answer = new CorrectAnswer();
 		answer.setId(answerForm.getAnswerId());
 		answer.setAnswer(answerForm.getAnswer());
 		correctAnswerService.ansUpdate(answer);
-		
+
 		return "redirect:/list";
 	}
 
@@ -175,31 +179,104 @@ public class QuestionController {
 		Question question = questionService.select(id);
 		registerForm.setId(question.getId());
 		registerForm.setQuestion(question.getQuestion());
-		
+
 		CorrectAnswer answer = correctAnswerService.select(id);
 		answerForm.setAnswerId(answer.getId());
 		answerForm.setAnswer(answer.getAnswer());
-		
+
 		model.addAttribute("registerForm", registerForm);
 		model.addAttribute("answerForm", answerForm);
 		return "deleteConfirm";
 	}
-	
+
 	/**
 	 * 削除
 	 */
 	@PostMapping("/delete")
-    public String delete(RegisterForm registerForm, AnswerForm answerForm) {
+	public String delete(RegisterForm registerForm, AnswerForm answerForm) {
 		Question question = new Question();
 		question.setId(registerForm.getId());
 		questionService.delete(question);
-		
+
 		CorrectAnswer answer = new CorrectAnswer();
 		answer.setId(answerForm.getAnswerId());
 		correctAnswerService.ansDelete(answer);
+
+		return "redirect:/list";
+	}
+
+	// テスト一覧
+	@GetMapping("/test")
+	public String test(@ModelAttribute AnswerForm answerForm, Model model) {
+		// 一覧表示ボタンが押されると一覧をmodelに登録。model = requestと同じ
+		List<Question> qList = questionService.getRandomQuestionList();
+
+		model.addAttribute("qList", qList);
+		model.addAttribute("answerForm", answerForm);
+		return "test";
+	}
+
+	// フォームで入力した値をAnswerFormにいれる
+	// Answerformの値とDBの値を比較
+	// 同じだったら正解として１カウント
+	// ユーザー名の表示をする
+	@PostMapping("/testResult")
+	public String testResult(HttpServletRequest request, @ModelAttribute AnswerForm answerForm, Model model) {
+		// inputされた値を配列で受け取ります questionsのidとanswersのid
+		String[] questions_ids = request.getParameterValues("id");
+		String[] ans = request.getParameterValues("answer");
+
+		// ここで比較するのはinputの入力値とDBに入っている値
+		// questionsのidを受け取る→DBにあるquestionsに紐づく値を探すため
+		List<AnswerForm> ansList = new ArrayList<AnswerForm>();
+		int qId[] = new int[questions_ids.length]; //ここでquestions_idsがnullになってる
+		String[] answers = new String[ansList.size()];
+		double dubcount = 0;
+
+		for (int i = 0; i < questions_ids.length; i++) {
+			qId[i] = Integer.parseInt(questions_ids[i]);
+			ansList = (List<AnswerForm>) correctAnswerService.select(qId[i]);
+
+			answers = new String[ansList.size()];
+
+			for (int j = 0; j < ansList.size(); j++) {
+				if (ansList.get(j) != null) {
+
+					// answersを１つずつ詰めていく
+					answers[j] = ansList.get(j).getAnswer();
+					// もし入力の値がcorrect_answersのanswerと文字列がイコールだったらHistoriesのpointカラムを+1する
+
+					for (int k = 0; k < ans.length; k++) {
+						if (answers[j].equals(ans[k])) {
+							dubcount++;
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		Question question = new Question();
+
+		// 質問数のカウント
+		double dubqCount = question.getQuestionsCount();
+
+		// 計算をする 正解数÷問題数(四捨五入をするのでdouble型になる)
+		long lresult = Math.round(100 * dubcount / dubqCount);
+		int result = (int) lresult;
+
+		// 質問数と回答数表示のため整数にする
+		int qCount = (int) dubqCount;
+		int count = (int) dubcount;
 		
-        return "redirect:/list";
-    }
+		answerForm.setQCount(qCount);
+		answerForm.setCount(count);
+		answerForm.setResult(result);
+
+		model.addAttribute("answerForm", answerForm);
+		return "testResult";
+
+	}
 
 	private Question makeQuestion(RegisterForm registerForm) {
 		Question question = new Question();

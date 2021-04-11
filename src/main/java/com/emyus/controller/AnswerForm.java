@@ -12,6 +12,36 @@ public class AnswerForm {
 	@Size(min = 1, max = 200, message = "Please input 200character or less")
 	private String answer;
 	
+	private int result;
+
+	// 質問数と回答数表示
+	int qCount;
+
+	int count;
+	
+	public int getResult() {
+		return result;
+	}
+
+	public void setResult(int result) {
+		this.result = result;
+	}
+
+	public int getQCount() {
+		return qCount;
+	}
+
+	public void setQCount(int qCount) {
+		this.qCount = qCount;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 	public int getAnswerId() {
 		return id;
