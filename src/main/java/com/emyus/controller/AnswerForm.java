@@ -21,6 +21,8 @@ public class AnswerForm {
 	// 質問数と回答数表示
 	int qCount;
 
+	double dubqCount;
+
 	int count;
 
 	public int getAnswerId() {
@@ -61,6 +63,14 @@ public class AnswerForm {
 
 	public void setQCount(int qCount) {
 		this.qCount = qCount;
+	}
+	
+	public double getDubqCount() {
+		return dubqCount;
+	}
+
+	public double setDubqCount(double dubqCount) {
+		return dubqCount;
 	}
 
 	public int getCount() {

@@ -1,7 +1,9 @@
 package com.emyus.controller;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -226,25 +228,28 @@ public class QuestionController {
 		// inputされた値を配列で受け取ります questionsのidとanswersのid
 		String[] questions_ids = request.getParameterValues("id");
 		String[] ans = request.getParameterValues("answer");
+		//String[] ansを使える形にする
+		List<String> ansList = Arrays.asList(ans);
 
 		// ここで比較するのはinputの入力値とDBに入っている値
 		// questionsのidを受け取る→DBにあるquestionsに紐づく値を探すため
-		List<AnswerForm> ansList = new ArrayList<AnswerForm>();
-		int qId[] = new int[questions_ids.length]; //ここでquestions_idsがnullになってる
+		int qId[] = new int[questions_ids.length];
 		String[] answers = new String[ansList.size()];
+		
 		double dubcount = 0;
 
 		for (int i = 0; i < qId.length; i++) {
 			qId[i] = Integer.parseInt(questions_ids[i]);
-			ansList = (List<AnswerForm>) correctAnswerService.select(qId[i]);
-
+			CorrectAnswer findAns = correctAnswerService.select(qId[i]);
+			List<CorrectAnswer> findAnswers = Arrays.asList(findAns);
+			
 			answers = new String[ansList.size()];
 
-			for (int j = 0; j < ansList.size(); j++) {
-				if (ansList.get(j) != null) {
+			for (int j = 0; j < findAnswers.size(); j++) {
+				if (findAnswers.get(j) != null) {
 
 					// answersを１つずつ詰めていく
-					answers[j] = ansList.get(j).getAnswer();
+					answers[j] = findAnswers.get(j).getAnswer();
 					// もし入力の値がcorrect_answersのanswerと文字列がイコールだったらHistoriesのpointカラムを+1する
 
 					for (int k = 0; k < ans.length; k++) {
@@ -257,18 +262,17 @@ public class QuestionController {
 			}
 		}
 
-		Question question = new Question();
-
 		// 質問数のカウント
-		double dubqCount = question.getQuestionsCount();
+		double dubqCount = answerForm.setDubqCount(dubcount);
+		
+		int qCount = questions_ids.length;
 
 		// 計算をする 正解数÷問題数(四捨五入をするのでdouble型になる)
-		long lresult = Math.round(100 * dubcount / dubqCount);
+		long lresult = Math.round(100 * dubqCount / qCount);
 		int result = (int) lresult;
 
 		// 質問数と回答数表示のため整数にする
-		int qCount = (int) dubqCount;
-		int count = (int) dubcount;
+		int count = (int) dubqCount;
 		
 		answerForm.setQCount(qCount);
 		answerForm.setCount(count);

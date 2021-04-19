@@ -12,33 +12,34 @@
 		from
 			questions
 	</select>
-	
+
 	<select id="randomAll" resultType="com.emyus.entity.Question">
 		select
 			id,
 			question
 		from
 			questions
-		order by rand()
+			order by rand()
 	</select>
 
 	<!-- questionのオブジェクトが入ってきてるのでparameterTypeを設定 -->
 	<insert id="save" parameterType="string">
-		insert into Questions (question, created_at) values (#{question},
+		insert into Questions (question,
+		created_at) values (#{question},
 		current_timestamp())
 	</insert>
-	
-	 <select id="select" resultType="com.emyus.entity.Question">
-        select * from questions where id = #{id}
-    </select>
+
+	<select id="select" resultType="com.emyus.entity.Question">
+		select * from questions where id = #{id}
+	</select>
 
 	<update id="update">
 		update Questions set
-			question = #{question}
+		question = #{question}
 		where id = #{id}
 	</update>
-	
+
 	<delete id="delete">
-     delete from questions where id = #{id}
-   </delete>
+		delete from questions where id = #{id}
+	</delete>
 </mapper>

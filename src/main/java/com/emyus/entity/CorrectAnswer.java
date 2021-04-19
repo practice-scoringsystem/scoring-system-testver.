@@ -23,7 +23,7 @@ public class CorrectAnswer {
 	
 	private Timestamp updated_at;
 	
-	private List<AnswerForm> answers;
+	private List<CorrectAnswer> answers;
 
 	public int getId() {
 		return id;
@@ -65,11 +65,11 @@ public class CorrectAnswer {
 		this.updated_at = updated_at;
 	}
 	
-	public List<AnswerForm> getAnswers() {
+	public List<CorrectAnswer> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(List<AnswerForm> answers) {
+	public void setAnswers(List<CorrectAnswer> answers) {
 		this.answers = answers;
 	}
 }

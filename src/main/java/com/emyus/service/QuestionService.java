@@ -22,7 +22,7 @@ public class QuestionService {
 	public List<Question> getRandomQuestionList() {
 		return this.questionRepository.randomAll();
 	}
-
+	
 	// 登録機能
 	public void save(Question question) {
 		questionRepository.save(question);
