@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -274,14 +275,20 @@ public class QuestionController {
 		// 質問数と回答数表示のため整数にする
 		int count = (int) dubqCount;
 		
+		String user_name = (String)session.getAttribute("user_name");
+		
 		answerForm.setQCount(qCount);
 		answerForm.setCount(count);
 		answerForm.setResult(result);
+		answerForm.setUserName(user_name);
 
 		model.addAttribute("answerForm", answerForm);
 		return "testResult";
 
 	}
+	
+	@Autowired
+	private HttpSession session;
 
 	private Question makeQuestion(RegisterForm registerForm) {
 		Question question = new Question();

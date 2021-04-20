@@ -13,17 +13,13 @@ public class AnswerForm {
 	@NotNull
 	@Size(min = 1, max = 200, message = "Please input 200character or less")
 	private String answer;
-	
 	private int result;
-	
 	private List<AnswerForm> answers;
-
 	// 質問数と回答数表示
-	int qCount;
-
-	double dubqCount;
-
-	int count;
+	private int qCount;
+	private double dubqCount;
+	private int count;
+	private String name;
 
 	public int getAnswerId() {
 		return id;
@@ -80,5 +76,14 @@ public class AnswerForm {
 	public void setCount(int count) {
 		this.count = count;
 	}
+
+	public String getUserName() {
+		return name;
+	}
+
+	public void setUserName(String name) {
+		this.name = name;
+	}
+
 	
 }

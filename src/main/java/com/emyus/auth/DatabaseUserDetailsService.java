@@ -6,6 +6,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 import com.emyus.auth.UserRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private HttpSession session;
 
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
@@ -20,6 +25,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 		if (user == null) {
 			throw new UsernameNotFoundException(id + "is not found");
 		} else {
+			session.setAttribute("user_name", user.getUserName());
 			return user;
 		}
 	}

@@ -7,7 +7,7 @@
 	<select id="identifyUser" parameterType="java.lang.String"
 		resultMap="userDitails">
 		select
-		id, password
+		*
 		from users
 		where id = #{id}
 		and deleteflag = 0

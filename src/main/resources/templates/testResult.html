@@ -9,10 +9,12 @@
 	<h2>テスト結果</h2>
 	<div th:object="${answerForm}">
 	<p>
+		<a th:text="${answerForm.UserName}"></a>さん
+	</p>
+	<p>
 		<a th:text="${answerForm.qCount}"></a>問中<a th:text="${answerForm.count}"></a>問中問正解です。
 	</p>
 	<p><a th:text="${answerForm.result}"></a>点でした。</p>
 	</div>
-
 </body>
 </html>
