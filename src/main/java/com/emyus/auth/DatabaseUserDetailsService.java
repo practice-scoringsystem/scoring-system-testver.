@@ -26,6 +26,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException(id + "is not found");
 		} else {
 			session.setAttribute("user_name", user.getUserName());
+			session.setAttribute("user_id", user.getId());
 			return user;
 		}
 	}

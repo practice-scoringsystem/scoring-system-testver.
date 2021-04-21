@@ -1,9 +1,7 @@
 package com.emyus.controller;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.emyus.entity.CorrectAnswer;
+import com.emyus.entity.History;
 import com.emyus.entity.Question;
 import com.emyus.service.CorrectAnswerService;
+import com.emyus.service.HistoryService;
 import com.emyus.service.QuestionService;
 
 @Controller
@@ -223,6 +223,9 @@ public class QuestionController {
 	// Answerformの値とDBの値を比較
 	// 同じだったら正解として１カウント
 	// ユーザー名の表示をする
+	@Autowired
+	HistoryService historyService;
+	
 	@PostMapping("/testResult")
 	public String testResult(HttpServletRequest request, @ModelAttribute AnswerForm answerForm, Model model) {
 		
@@ -275,7 +278,13 @@ public class QuestionController {
 		// 質問数と回答数表示のため整数にする
 		int count = (int) dubqCount;
 		
+		int user_id = (int)session.getAttribute("user_id");
 		String user_name = (String)session.getAttribute("user_name");
+		
+		History history = new History();
+		history.setUserId(user_id);
+		history.setPoint(result);
+		historyService.historySave(history);
 		
 		answerForm.setQCount(qCount);
 		answerForm.setCount(count);
