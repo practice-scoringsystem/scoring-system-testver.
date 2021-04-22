@@ -296,6 +296,17 @@ public class QuestionController {
 
 	}
 	
+	//テスト採点履歴
+	@GetMapping("/history")
+	public String history(Model model) {
+		int user_id = (int)session.getAttribute("user_id");
+		List<History> hList = historyService.getUserHistoryList(user_id);
+		
+		model.addAttribute("hList", hList);
+		
+		return "history";
+	}
+	
 	@Autowired
 	private HttpSession session;
 

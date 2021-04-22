@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>採点履歴</title>
+</head>
+<body>
+
+<a class="btn btn-primary" th:href="${'/'}">戻る</a>
+	
+	<div th:if="${hList} !=null">
+		<table>
+			<tr>
+				<th>点数</th>
+				<th>採点時間</th>
+			</tr>
+			
+			<tr th:each="history:${hList}">
+				<td th:text="${history.point}"></td>
+				<td th:text="${history.created_at}"></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>
