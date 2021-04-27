@@ -9,6 +9,7 @@ public class Question {
 	private String question;
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	private double questions_count;
 	
 	//Questionのgetterとsetter
 	public int getId() {
@@ -34,6 +35,10 @@ public class Question {
 	}
 	public void setUpdatedAt(Timestamp updated_at) {
 		this.updated_at = updated_at;
+	}
+	public double getQuestionsCount() {
+		// TODO 自動生成されたメソッド・スタブ
+		return questions_count;
 	}
 	
 }

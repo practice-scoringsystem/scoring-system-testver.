@@ -1,9 +1,12 @@
 package com.emyus.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.emyus.controller.AnswerForm;
 
 public class CorrectAnswer {
 
@@ -19,8 +22,9 @@ public class CorrectAnswer {
 	private Timestamp created_at;
 	
 	private Timestamp updated_at;
-
 	
+	private List<CorrectAnswer> answers;
+
 	public int getId() {
 		return id;
 	}
@@ -59,5 +63,13 @@ public class CorrectAnswer {
 
 	public void setUpdated_at(Timestamp updated_at) {
 		this.updated_at = updated_at;
+	}
+	
+	public List<CorrectAnswer> getAnswers() {
+		return answers;
+	}
+
+	public void setAnswers(List<CorrectAnswer> answers) {
+		this.answers = answers;
 	}
 }

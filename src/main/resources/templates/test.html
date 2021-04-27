@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>テスト画面</title>
+</head>
+<body>
+	<p>問題・答え一覧</p>
+	
+	<a class="btn btn-primary" th:href="${'/'}">topページ</a>
+	<form class="form-horizontal" th:method="post"
+		th:action="@{/testResult}" th:object="${answerForm}">
+	<div th:if="${qList} !=null">
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>問題</th>
+				<th>答え</th>
+			</tr>
+			<!-- controllerで渡ってきた値を${}に入れてループ内ではquestionとして扱う -->
+			<tr th:each="question:${qList}">
+				<td th:text="${question.id}"></td>
+				<td><input type="hidden" name="id" th:value="${question.id}"></td>
+				<td th:text="${question.question}"></td>
+				<td><input type="hidden" name="AnswerId" th:value="${answerForm.AnswerId}"></td>
+				<td><input type="text" name="answer" th:value="${answerForm.Answer}"></td>
+			</tr>
+		</table>
+	</div>
+	<input type="submit" value="採点する">
+	</form>
+
+</body>
+</html>

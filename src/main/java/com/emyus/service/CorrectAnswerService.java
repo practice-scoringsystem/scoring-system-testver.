@@ -18,9 +18,14 @@ public class CorrectAnswerService {
 		return this.correctAnswerRepository.findAll();
 	}
 
-	// 1件検索
+	// Questionsに紐づく1件検索
 	public CorrectAnswer select(int id) {
 		return correctAnswerRepository.select(id);
+	}
+
+	// correct_answersを1件検索
+	public CorrectAnswer ansSelect(int id) {
+		return correctAnswerRepository.ansSelect(id);
 	}
 
 	// 登録機能
@@ -32,4 +37,10 @@ public class CorrectAnswerService {
 	public void ansUpdate(CorrectAnswer answer) {
 		correctAnswerRepository.ansUpdate(answer);
 	}
+
+	// 削除
+	public void ansDelete(CorrectAnswer answer) {
+		correctAnswerRepository.ansDelete(answer);
+	}
+
 }

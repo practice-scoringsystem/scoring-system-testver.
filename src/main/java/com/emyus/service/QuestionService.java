@@ -18,6 +18,11 @@ public class QuestionService {
 		return this.questionRepository.findAll();
 	}
 
+	// 全件ランダム表示
+	public List<Question> getRandomQuestionList() {
+		return this.questionRepository.randomAll();
+	}
+	
 	// 登録機能
 	public void save(Question question) {
 		questionRepository.save(question);

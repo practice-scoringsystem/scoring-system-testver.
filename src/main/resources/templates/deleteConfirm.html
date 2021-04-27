@@ -9,17 +9,21 @@
 	<h2>削除確認画面</h2>
 	<div th:object="${registerForm}">
 		<p th:text="*{question}"></p>
-
-		<form method="get" th:action="@{/list}">
-		  <input type="submit" value="戻る">
-		</form>
-
-		<form method="post" th:action="@{/delete}">
-			<input type="hidden" name="id" th:value="${registerForm.id}">
-			<input type="hidden" name="question"
-				th:value="${registerForm.question}"> <input type="submit"
-				value="削除する">
-		</form>
+		<div th:object="${answerForm}">
+			<p th:text="*{answer}"></p>
+	
+			<form method="get" th:action="@{/list}">
+			  <input type="submit" value="戻る">
+			</form>
+	
+			<form method="post" th:action="@{/delete}">
+				<input type="hidden" name="id" th:value="${registerForm.id}">
+				<input type="hidden" name="question" th:value="${registerForm.question}">
+				<input type="hidden" name="id" th:field="*{AnswerId}" />	
+				<input type="submit" value="削除する">
+			</form>
+			
+		</div>
 	</div>
 
 </body>

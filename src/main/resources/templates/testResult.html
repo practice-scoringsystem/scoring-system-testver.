@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>テスト結果</title>
+</head>
+<body>
+<a class="btn btn-primary" th:href="${'/'}">topページ</a>
+	<h2>テスト結果</h2>
+	<div th:object="${answerForm}">
+	<p>
+		<a th:text="${answerForm.UserName}"></a>さん
+	</p>
+	<p>
+		<a th:text="${answerForm.qCount}"></a>問中<a th:text="${answerForm.count}"></a>問中問正解です。
+	</p>
+	<p><a th:text="${answerForm.result}"></a>点でした。</p>
+	</div>
+</body>
+</html>
